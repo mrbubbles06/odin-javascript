@@ -3,4 +3,5 @@ All of the javascript exercises that i've done from TOP. I know that it is gener
 
 For the odin exercises that were in they repo they gave me, I will add those to this repo once I've finished all of them.
 
-[rock paper scissors](/rock-paper-scissors-cli.html)
+* [rock paper scissors](/rock-paper-scissors-cli.html)
+* [etch-a-sketch](etch-a-sketch.html)
