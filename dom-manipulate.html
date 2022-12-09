@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>dom manipulation</title>
+  </head>
+  <body>
+    <script>
+      const redp = document.createElement("p");
+      redp.style.color = "red";
+      redp.textContent = "Hey I'm red!";
+      document.body.appendChild(redp);
+
+      const blueh3 = document.createElement("h3");
+      blueh3.style.color = "blue";
+      blueh3.textContent = "I'm a blue h3!";
+      document.body.appendChild(blueh3);
+
+      const container = document.createElement("div");
+      container.style.cssText = "border: 2px solid black; background-color: pink;";
+
+      const conth1 = document.createElement("h1");
+      conth1.textContent = "I'm in a div!";
+      container.appendChild(conth1);
+
+      const contp = document.createElement("p");
+      contp.textContent = "ME TOO!";
+      container.appendChild(contp);
+
+      document.body.appendChild(container);
+
+      const btn = document.createElement("button");
+      btn.setAttribute("id", "button");
+      btn.textContent = "CLIKC ME CLICK ME CLICK ME!!!";
+      document.body.appendChild(btn);
+
+      // creation of the DOM ↑
+      // events ↓
+      btn.addEventListener("click", (e) => {
+        e.target.style.background = "blue";
+      });
+    </script>
+  </body>
+</html>
