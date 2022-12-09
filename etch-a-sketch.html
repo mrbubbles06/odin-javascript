@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Etch-A-Sketch</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        display: grid;
+        place-items: center;
+        background-color: #2d2d2d;
+        height: 100vh;
+        width: 100vw;
+      }
+      .container {
+        display: grid;
+        grid-template-columns: repeat(16, 1fr);
+        grid-template-rows: repeat(16, 1fr);
+        background-color: black;
+      }
+      .container > div {
+        background-color: inherit;
+        transition: all 250ms ease;
+      }
+      @media screen and (orientation: portrait) {
+        .container {
+          height: 100vw;
+          width: 100vw;
+        }
+      }
+      @media screen and (orientation: landscape) {
+        .container {
+          height: 100vh;
+          width: 100vh;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container"></div>
+    <script>
+      console.log("type rainbow for rainbow blocks");
+      const container = document.querySelector(".container");
+      let amount;
+      const colors = [
+        "#ff8700",
+        "#ff0000",
+        "#ffd300",
+        "#deff0a",
+        "#a1ff0a",
+        "#0aff99",
+        "#0aefff",
+        "#147df5",
+        "#580aff",
+        "#be0aff",
+      ];
+      let keysdown = [];
+      let rainbowMode = false;
+
+      const createGrid = (rainbow) => {
+        if (rainbow == false) rainbowMode = false;
+        amount = prompt(
+          "How many pixels per side would you like?\n(click anywhere to create a new grid)"
+        );
+        if (amount > 100) amount = 100;
+        container.innerHTML = "";
+
+        for (let i = 0; i < Number(amount) * Number(amount); i++) {
+          const div = document.createElement("div");
+          container.appendChild(div);
+          div.addEventListener("mouseover", function (e) {
+            if (rainbowMode == true) {
+              e.target.style.backgroundColor =
+                colors[Math.floor(Math.random() * colors.length)];
+            } else {
+              e.target.style.backgroundColor = "white";
+            }
+          });
+        }
+
+        if (window.innerWidth > window.innerHeight) {
+          container.style.cssText = `grid-template-columns: repeat(${amount}, 1fr); grid-template-rows: repeat(${amount}, 1fr);`;
+        } else {
+          container.style.cssText = `grid-template-columns: repeat(${amount}, 1fr); grid-template-rows: repeat(${amount}, 1fr);`;
+        }
+
+        const divs = document.querySelectorAll(".container > div");
+      };
+
+      createGrid(false);
+      container.addEventListener("click", () => {
+        createGrid(false);
+      });
+
+      window.addEventListener("keydown", (e) => {
+        if (e.key != "Backspace") keysdown.push(e.key);
+        if (e.key == "Backspace") keysdown.splice(-1);
+        if (keysdown.join("") == "rainbow") {
+          createGrid(true);
+          rainbowMode = true;
+        }
+      });
+    </script>
+  </body>
+</html>
